@@ -1,25 +1,43 @@
 <!doctype html>
 <html>
 
-<head>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Find the bisecting number</title>
+    <title>Find the bisecting number</title>
 
-  <link rel="import" href="bower_components/core-input/core-input.html">
-  <link rel="import" href="bower_components/paper-input/paper-input.html">
+<!--
+    <link rel="import" href="bower_components/core-input/core-input.html">
+    <link rel="import" href="bower_components/paper-input/paper-input.html">
+-->
+    <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.1/material.indigo-pink.min.css">
+    <script src="https://storage.googleapis.com/code.getmdl.io/1.0.1/material.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-</head>
+  </head>
 
-<body fullbleed vertical layout unresolved>
+<body>
+
+  
+  <h1>Find the bisecting number</h1>
+  
+  <input type="number">
+
+  <input is="iron-input" bind-value="{{myValue}}">
+
+
+<!-- Code for using polymer elements 
+Paper input
+<paper-input label="Input label"></paper-input>
 
   <div>
-    <h1>Find the bisecting number</h1>
+input is="core-input" type="number"
+    <input is="core-input" type="number"></input>
   </div>
 
   <div>
-
-    <input is="core-input" type="number"></input>
-<!-- add a comment -->
+  paper-input
     <paper-input label="First number" type="number"></paper-input>
   </div>
 
@@ -35,6 +53,8 @@
   <paper-input-decorator floatingLabel label="Your address">
     <textarea></textarea>
   </paper-input-decorator>
+-->
+
 
 </body>
 
