@@ -22,9 +22,20 @@
   
   <h1>Find the bisecting number</h1>
   
+<!--  
   <input type="number">
+-->
+  <form action="#">
+    <div class="mdl-textfield mdl-js-textfield textfield-demo">
+      <input class="mdl-textfield__input" type="number" pattern="-?[0-9]*(\.[0-9]+)?" id="sample2" />
+      <label class="mdl-textfield__label" for="sample2">Number...</label>
+      <span class="mdl-textfield__error">Input is not a number!</span>
+    </div>
+  </form>
 
-  <input is="iron-input" bind-value="{{myValue}}">
+  <!-- Slider with Starting Value -->
+  <input class="mdl-slider mdl-js-slider" type="range"
+  min="0" max="999" value="500" tabindex="0"/>
 
 
 <!-- Code for using polymer elements 
