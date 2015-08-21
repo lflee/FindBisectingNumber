@@ -1,0 +1,20 @@
+{
+  "name": "FindBisectingNumber",
+  "version": "0.0.0",
+  "homepage": "https://lflee.github.io/FindBisectingNumber",
+  "authors": [
+    "lflee <leelapfung@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "paper-input": "PolymerElements/paper-input#~1.0.11"
+  }
+}
