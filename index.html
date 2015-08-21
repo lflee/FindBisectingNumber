@@ -2,37 +2,40 @@
 <html>
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Find the bisecting number</title>
+    <title>Find the bisecting number</title>
 
-  <link rel="import" href="bower_components/core-input/core-input.html">
-  <link rel="import" href="bower_components/paper-input/paper-input.html">
+    <link rel="import" href="app/bower_components/core-input/core-input.html">
+    <link rel="import" href="app/bower_components/paper-input/paper-input.html">
+
+    <script type="text/javascript">
+
+        function calMean(){
+          var num1 = document.getElementById("num1").value ;
+          var num2 = document.getElementById("num2").value ;
+
+          var mean = Math.ceil( (Number(num1) + Number(num2) )/2 ) ;
+
+          console.log(mean);
+
+          document.getElementById("mean").innerHTML = mean ;
+
+        }
+
+    </script>
 
 </head>
 
 <body fullbleed vertical layout unresolved>
-
-  <div>
     <h1>Find the bisecting number</h1>
-  </div>
+    
+    <paper-input id="num1" label="First Number" type="number" onchange="calMean()"></paper-input>
 
-  <div>
-    <input is="core-input" type=number>
-    <paper-input label="First number"></paper-input>
-  </div>
-
-  <paper-input-decorator label="First number">
-    <input is="core-input">
-  </paper-input-decorator>
-
-  <paper-input-decorator label="Second number">
-    <input is="core-input">
-  </paper-input-decorator>
-
-
-  <paper-input-decorator floatingLabel label="Your address">
-    <textarea></textarea>
-  </paper-input-decorator>
+    <paper-input id="num2" label="Second Number" type="number" onchange="calMean()"></paper-input>
+    
+    <div id="mean"></div>
 
 </body>
 
