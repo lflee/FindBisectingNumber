@@ -1,80 +1,41 @@
 <!doctype html>
 <html>
 
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Find the bisecting number</title>
 
-<!--
-    <link rel="import" href="bower_components/core-input/core-input.html">
-    <link rel="import" href="bower_components/paper-input/paper-input.html">
--->
-    <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.1/material.indigo-pink.min.css">
-    <script src="https://storage.googleapis.com/code.getmdl.io/1.0.1/material.min.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="import" href="app/bower_components/core-input/core-input.html">
+    <link rel="import" href="app/bower_components/paper-input/paper-input.html">
 
-    <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-  ga('create', 'UA-65691103-1', 'auto');
-  ga('send', 'pageview');
-   </script>
+    <script type="text/javascript">
 
-  </head>
+        function calMean(){
+          var num1 = document.getElementById("num1").value ;
+          var num2 = document.getElementById("num2").value ;
 
-<body>
+          var mean = Math.ceil( (Number(num1) + Number(num2) )/2 ) ;
 
-  
-  <h1>Find the bisecting number</h1>
-  
-<!--  
-  <input type="number">
--->
-  <form action="#">
-    <div class="mdl-textfield mdl-js-textfield textfield-demo">
-      <input class="mdl-textfield__input" type="number" pattern="-?[0-9]*(\.[0-9]+)?" id="sample2" />
-      <label class="mdl-textfield__label" for="sample2">Number...</label>
-      <span class="mdl-textfield__error">Input is not a number!</span>
-    </div>
-  </form>
+          console.log(mean);
 
-  <!-- Slider with Starting Value -->
-  <input class="mdl-slider mdl-js-slider" type="range"
-  min="0" max="999" value="500" tabindex="0"/>
+          document.getElementById("mean").innerHTML = mean ;
 
+        }
 
-<!-- Code for using polymer elements 
-Paper input
-<paper-input label="Input label"></paper-input>
+    </script>
 
-  <div>
-input is="core-input" type="number"
-    <input is="core-input" type="number"></input>
-  </div>
+</head>
 
-  <div>
-  paper-input
-    <paper-input label="First number" type="number"></paper-input>
-  </div>
+<body fullbleed vertical layout unresolved>
+    <h1>Find the bisecting number</h1>
+    
+    <paper-input id="num1" label="First Number" type="number" onchange="calMean()"></paper-input>
 
-  <paper-input-decorator label="First number">
-    <input is="core-input">
-  </paper-input-decorator>
-
-  <paper-input-decorator label="Second number">
-    <input is="core-input">
-  </paper-input-decorator>
-
-
-  <paper-input-decorator floatingLabel label="Your address">
-    <textarea></textarea>
-  </paper-input-decorator>
--->
-
+    <paper-input id="num2" label="Second Number" type="number" onchange="calMean()"></paper-input>
+    
+    <div id="mean"></div>
 
 </body>
 
