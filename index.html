@@ -1,55 +1,101 @@
 <!doctype html>
-<html>
 
-<head>
-    <meta charset="UTF-8">
+<html>
+  <head>
+    <title>揾平均數 🔎(X+Y)/2=?🔍</title>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Find the bisecting number</title>
+    <link rel="manifest" href="/manifest.json">
 
+    <script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+
+    <!-- <link rel="import" href="/src/FindBisectingNumber-app/FindBisectingNumber-app.html"> -->
 
     <link rel="import" href="app/bower_components/paper-input/paper-input.html">
-    <link rel="import" href="app/bower_components/neon-animation/web-animations.html">
-    <link rel="import" href="app/bower_components/neon-animation/neon-animated-pages.html">
-    <link rel="import" href="app/bower_components/neon-animation/neon-animatable.html">
-    <link rel="import" href="app/bower_components/neon-animation/animations/slide-from-right-animation.html">
-    <link rel="import" href="app/bower_components/neon-animation/animations/slide-left-animation.html">
+
+
 
     <script type="text/javascript">
 
-        function calMean(){
-          var num1 = document.getElementById("num1").value ;
-          var num2 = document.getElementById("num2").value ;
+    var smallNum;
+    var bigNum;
+    var max;
+    var min;
 
-          var mean = Math.ceil( (Number(num1) + Number(num2) )/2 ) ;
+    function updateSmallNum(){
+      smallNum = document.getElementById("small").value ;
 
-          console.log(mean);
+      if(smallNum != null && bigNum != null){
+          calMean();
+      }
+    }
 
-          document.getElementById("mean").innerHTML = mean ;
+    function updateBigNum(){
+      bigNum = document.getElementById("big").value ;
+      if(smallNum != null && bigNum != null){
+          calMean();
+      }
+    }
 
-        }
+
+    function calMean(){
+//find current man and min
+//       if(num1 >= num2){
+//         max = num1;
+//         min = num2;
+//       }else {
+//         max = num2;
+//         min = num1;
+//       }
+// //display man and min
+//       document.getElementById("maxNum").innerHTML = max ;
+//       document.getElementById("minNum").innerHTML = min ;
+
+      var mean = Math.ceil( (Number(smallNum) + Number(bigNum) )/2 ) ;
+
+      console.log("Current mean is:" + mean);
+
+      document.getElementById("meanNum").innerHTML = mean ;
+
+    }
 
     </script>
 
-</head>
-
-<body fullbleed vertical layout unresolved>
-    <h1>Find the bisecting number</h1>
-    
-    <paper-input id="num1" label="First Number" type="number" onchange="calMean()"></paper-input>
-
-    <paper-input id="num2" label="Second Number" type="number" onchange="calMean()"></paper-input>
-    
-    <div id="mean"></div>
+  </head>
+  <body>
+    <FindBisectingNumber-app>
 
 
-<neon-animated-pages selected="0"
-                     entry-animation="slide-from-right-animation"
-                     exit-animation="slide-left-animation">
-  <neon-animatable>1</neon-animatable>
-  <neon-animatable>2</neon-animatable>
-</neon-animated-pages>
+    </FindBisectingNumber-app>
 
-</body>
+    <h1>揾平均數 🔎(X+Y)/2=?🔍</h1>
 
+    <paper-input id="small" label="Smaller number" type="number" onchange="updateSmallNum()"></paper-input>
+
+    <paper-input id="big" label="Bigger number" type="number" onchange="updateBigNum()"></paper-input>
+
+    <div id="maxNumIs" disabled>最大數係：
+      <div id="maxNum">
+
+      </div>
+    </div>
+
+    <div id="minNumIs" disabled>最細數係：
+      <div id="minNum">
+
+      </div>
+    </div>
+
+
+    <div id="meanNumIs">中間數係：
+      <div id="meanNum">
+
+      </div>
+    </div>
+
+
+<paper-input label="this input requires letters only" auto-validate pattern="[a-zA-Z]*" error-message="letters only!"></paper-input>
+
+  </body>
 </html>

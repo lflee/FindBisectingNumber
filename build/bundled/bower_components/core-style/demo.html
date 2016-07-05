@@ -1,0 +1,34 @@
+<!DOCTYPE html><html><head>
+  <title>core-style</title>
+  <script src="../webcomponentsjs/webcomponents.js"></script>
+
+  <link rel="import" href="elements.html">
+  <link rel="import" href="my-theme.html">
+  
+</head>
+<body unresolved="" fullbleed="" vertical="" layout="">
+  <core-style ref="main"></core-style>
+
+  <template is="auto-binding">
+    <my-toolbar>
+      <span flex="">core-style</span>
+      <input type="color" value="{{g.theme.colorOne}}">
+      <input type="color" value="{{g.theme.colorTwo}}">
+      <input type="color" value="{{g.theme.colorThree}}">
+      <input type="range" min="1" max="8" value="{{g.columns}}">
+      <button>A button</button>
+    </my-toolbar>
+    <section flex="" horizontal="" wrap="" layout="">
+      <template repeat="{{item in items}}">
+        <my-panel>{{item}}</my-panel>
+      </template>
+    </section>
+  </template>
+
+  <script>!function(){addEventListener("polymer-ready",function(){for(var e=[],t=0;t<100;t++)e.push(t);CoreStyle.g.items=e,addEventListener("template-bound",function(t){t.target.g=CoreStyle.g,t.target.items=e})})}();</script>
+
+
+
+
+
+</body></html>

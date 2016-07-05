@@ -1,0 +1,21 @@
+<html><head><link href="../polymer/polymer.html" rel="import">
+<link href="../core-input/core-input.html" rel="import">
+
+<link href="paper-input-decorator.html" rel="import">
+
+</head><body><polymer-element name="paper-input">
+
+<template>
+
+  <style>:host{display:inline-block;}</style>
+
+  <paper-input-decorator id="decorator" label="{{label}}" floatinglabel="{{floatingLabel}}" value="{{value}}" disabled?="{{disabled}}">
+    <input is="core-input" id="input" value="{{value}}" committedvalue="{{committedValue}}" on-change="{{changeAction}}" disabled?="{{disabled}}">
+  </paper-input-decorator>
+
+</template>
+
+<script>Polymer("paper-input",{publish:{label:"",floatingLabel:!1,disabled:{value:!1,reflect:!0},value:"",committedValue:""},focus:function(){this.$.input.focus()},valueChanged:function(){this.$.decorator.updateLabelVisibility(this.value)},changeAction:function(e){this.fire("change",null,this)}});</script>
+
+</polymer-element>
+</body></html>

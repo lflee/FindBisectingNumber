@@ -1,0 +1,10 @@
+<html><head><link href="../polymer/polymer.html" rel="import">
+
+<style shim-shadowdom="">html /deep/ input[is=core-input]{width:20em;font:inherit;margin:0;padding:0;background-color:transparent;border:0;outline:none;}</style>
+
+</head><body><polymer-element name="core-input" extends="input">
+
+<script>Polymer("core-input",{publish:{committedValue:"",preventInvalidInput:!1},previousValidInput:"",eventDelegates:{input:"inputAction",change:"changeAction"},ready:function(){this.disabledHandler(),this.placeholderHandler()},attributeChanged:function(t,i){this[t+"Handler"]&&this[t+"Handler"](i)},disabledHandler:function(){this.disabled?this.setAttribute("aria-disabled",""):this.removeAttribute("aria-disabled")},placeholderHandler:function(){this.placeholder?this.setAttribute("aria-label",this.placeholder):this.removeAttribute("aria-label")},commit:function(){this.committedValue=this.value},changeAction:function(){this.commit()},inputAction:function(t){this.preventInvalidInput&&(t.target.validity.valid?this.previousValidInput=t.target.value:t.target.value=this.previousValidInput)}});</script>
+
+</polymer-element>
+</body></html>

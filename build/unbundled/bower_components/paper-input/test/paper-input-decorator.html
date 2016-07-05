@@ -1,0 +1,82 @@
+<!DOCTYPE html><html><head>
+  <meta charset="UTF-8">
+  <title>paper-input-decorator tests</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+
+  <script src="../../webcomponentsjs/webcomponents.js"></script>
+  <script src="../../web-component-tester/browser.js"></script>
+  <script src="../../polymer-gestures/test/js/fake.js"></script>
+
+  <script src="util.js"></script>
+
+  <link href="../../core-input/core-input.html" rel="import">
+
+  <link href="../paper-input-decorator.html" rel="import">
+  <link href="../paper-autogrow-textarea.html" rel="import">
+  <link href="../paper-char-counter.html" rel="import">
+
+  <style>paper-input-decorator{width:400px;}</style>
+
+</head>
+<body>
+
+  <template id="default">
+    <paper-input-decorator label="label">
+      <input is="core-input">
+    </paper-input-decorator>
+    <br>
+  </template>
+
+  <template id="floating-label">
+    <paper-input-decorator label="floating label" floatinglabel="">
+      <input is="core-input">
+    </paper-input-decorator>
+    <br>
+  </template>
+
+  <template id="label-visible-false">
+    <paper-input-decorator label="labelVisible = false" labelvisible="false">
+      <input is="core-input">
+    </paper-input-decorator>
+    <br>
+  </template>
+
+  <template id="floating-label-filled">
+    <paper-input-decorator label="input" floatinglabel="">
+      <input is="core-input" value="prefilled">
+    </paper-input-decorator>
+  </template>
+
+  <template id="no-input">
+    <paper-input-decorator label="no input">
+    </paper-input-decorator>
+    <br>
+  </template>
+
+  <template id="error">
+    <paper-input-decorator label="input" floatinglabel="" isinvalid="" error="error message">
+      <input is="core-input" value="something">
+    </paper-input-decorator>
+    <br>
+  </template>
+
+  <template id="auto-validate">
+    <paper-input-decorator autovalidate="" error="input is required">
+      <input is="core-input" required="">
+    </paper-input-decorator>
+    <br>
+  </template>
+
+  <template id="char-counter">
+    <paper-input-decorator label="character counter">
+      <input is="core-input" maxlength="5">
+      <paper-char-counter class="counter"></paper-char-counter>
+    </paper-input-decorator>
+    <br>
+  </template>
+
+  <script>function cloneAndAppendTemplate(e){var t=document.getElementById(e),a=document.importNode(t.content,!0),n=a.children[0];return document.body.appendChild(a),{d:n,i:n.querySelector("input")}}var fake=new Fake;test("label is invisible if value is not null",function(){var e=cloneAndAppendTemplate("default");e.i.value="foobar",e.d.updateLabelVisibility(e.i.value),assert.ok(!e.d._labelVisible)}),test("label is invisible if floating label and focused",function(e){var t=cloneAndAppendTemplate("floating-label");async.series([function(e){ensureFocus(t.i,e)},function(e){assert.ok(!t.d._labelVisible),e()}],e)}),test("label is invisible if value = 0",function(){var e=cloneAndAppendTemplate("default");e.i.value=0,e.d.updateLabelVisibility(e.i.value),assert.ok(!e.d._labelVisible)}),test("labelVisible overrides label visibility",function(){var e=cloneAndAppendTemplate("default");e.d.labelVisible=!1,assert.ok(!e.i.value),assert.ok(!e.d._labelVisible)}),test("labelVisible works in an attribute",function(){var e=cloneAndAppendTemplate("label-visible-false");assert.ok(!e.d._labelVisible)}),test("can create inputs lazily",function(){var e=cloneAndAppendTemplate("no-input"),t=document.createElement("input");t.value="foobar",e.d.appendChild(t),assert.ok(!e.d._labelVisible)}),test("tapping on floating label focuses input",function(e){var t=cloneAndAppendTemplate("floating-label-filled"),a=t.d.shadowRoot.querySelector(".floated-label");fake.downOnNode(a),fake.upOnNode(a),waitFor(function(){assertNodeHasFocus(t.i)},e)}),test("floating label and the error message are the same color",function(e){var t=cloneAndAppendTemplate("error");flush(function(){var a=getComputedStyle(t.d.$.floatedLabelText),n=getComputedStyle(t.d.shadowRoot.querySelector(".error-text"));assert.strictEqual(a.color,n.color),e()})}),test("auto-validate input validates after creation",function(){var e=cloneAndAppendTemplate("auto-validate");flush(function(){assert.ok(e.d.isInvalid)})}),test("char-counter is visible",function(){var e=cloneAndAppendTemplate("char-counter"),t=e.d.querySelector(".counter");assert.ok(0!=e.i.maxLength),assert.ok(""==e.d.error),e.i.id="input",t.target="input",t.ready(),flush(function(){assert.ok(!t.shadowRoot.querySelector(".counter-text").hidden)})}),test("char-counter is invalid when input exceeds maxLength",function(){var e=cloneAndAppendTemplate("char-counter"),t=e.d.querySelector(".counter");assert.ok(5==e.i.maxLength),e.i.id="input",t.target="input",t.ready(),flush(function(){e.i.value="nanananabatman";var a=new Event("input",{bubbles:!0});e.i.dispatchEvent(a),flush(function(){assert.ok(t._isCounterInvalid),assert.ok(e.d.isInvalid),assert.strictEqual(CoreStyle.g.paperInput.invalidColor,t.shadowRoot.querySelector(".counter-text").color),done()})})}),suite("a11y",function(){test("aria-label set on input",function(){var e=cloneAndAppendTemplate("default");flush(function(){assert.strictEqual(e.i.getAttribute("aria-label"),e.d.label)})})});</script>
+
+
+
+</body></html>

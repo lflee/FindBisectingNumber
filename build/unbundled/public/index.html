@@ -1,0 +1,31 @@
+<!DOCTYPE html><html><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <title>Find the bisecting number</title>
+
+    <link rel="import" href="app/bower_components/core-input/core-input.html">
+    <link rel="import" href="app/bower_components/paper-input/paper-input.html">
+
+
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+    <script>var config={apiKey:"AIzaSyBcCCTOhrjXiCTwyhwes5XrEGzxHwjJ7Vs",authDomain:"robust-index-91409.firebaseapp.com",databaseURL:"https://robust-index-91409.firebaseio.com",storageBucket:"robust-index-91409.appspot.com"};firebase.initializeApp(config);</script>
+        
+
+    <script type="text/javascript">function calMean(){var e=document.getElementById("num1").value,n=document.getElementById("num2").value,m=Math.ceil((Number(e)+Number(n))/2);console.log(m),document.getElementById("mean").innerHTML=m}</script>
+
+</head>
+
+<body fullbleed="" vertical="" layout="" unresolved="">
+    <h1>Find the bisecting number</h1>
+
+    <paper-input id="num1" label="First Number" type="number" onchange="calMean()"></paper-input>
+
+    <paper-input id="num2" label="Second Number" type="number" onchange="calMean()"></paper-input>
+
+    <div id="mean"></div>
+
+
+
+
+</body></html>

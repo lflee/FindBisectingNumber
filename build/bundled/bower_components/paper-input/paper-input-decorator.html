@@ -1,0 +1,93 @@
+<html><head><link href="../polymer/polymer.html" rel="import">
+<link href="../core-icon/core-icon.html" rel="import">
+<link href="../core-icons/core-icons.html" rel="import">
+<link href="../core-input/core-input.html" rel="import">
+<link href="../core-style/core-style.html" rel="import">
+
+</head><body><core-style id="paper-input-decorator">
+
+.label-text,
+.error {
+  color: {{g.paperInput.labelColor}};
+}
+
+::-webkit-input-placeholder {
+  color: {{g.paperInput.labelColor}};
+}
+
+::-moz-placeholder {
+  color: {{g.paperInput.labelColor}};
+}
+
+:-ms-input-placeholder {
+  color: {{g.paperInput.labelColor}};
+}
+
+.unfocused-underline {
+  background-color: {{g.paperInput.labelColor}};
+}
+
+:host([focused]) .floated-label .label-text {
+  color: {{g.paperInput.focusedColor}};
+}
+
+.focused-underline {
+  background-color: {{g.paperInput.focusedColor}};
+}
+
+:host(.invalid) .floated-label .label-text,
+.error {
+  color: {{g.paperInput.invalidColor}};
+}
+
+:host(.invalid) .unfocused-underline,
+:host(.invalid) .focused-underline {
+  background-color: {{g.paperInput.invalidColor}};
+}
+
+</core-style>
+
+<polymer-element name="paper-input-decorator" layout="" vertical="" on-transitionend="{{transitionEndAction}}" on-webkittransitionend="{{transitionEndAction}}" on-input="{{inputAction}}" on-down="{{downAction}}" on-tap="{{tapAction}}" on-char-counter-error="{{charCounterErrorAction}}">
+
+  <template>
+
+    <link href="paper-input-decorator.css" rel="stylesheet">
+    <core-style ref="paper-input-decorator"></core-style>
+
+    <div class="floated-label" aria-hidden="true" hidden?="{{!floatingLabel}}" invisible?="{{!floatingLabelVisible || labelAnimated}}">
+      
+      <span id="floatedLabelText" class="label-text">{{label}}</span>
+    </div>
+
+    <div class="input-body" flex="" auto="" relative="">
+
+      <div class="label" fit="" invisible="" aria-hidden="true">
+        
+        <span id="labelText" class="label-text" invisible?="{{!_labelVisible}}" animated?="{{labelAnimated}}">{{label}}</span>
+      </div>
+
+      <content select="*:not(.counter)"></content>
+
+    </div>
+
+    <div id="underline" class="underline" relative="">
+      <div class="unfocused-underline" fit="" invisible?="{{disabled}}"></div>
+      <div id="focusedUnderline" class="focused-underline" fit="" invisible?="{{!underlineVisible}}" animated?="{{underlineAnimated}}"></div>
+    </div>
+
+    <div class="footer" layout="" horizontal="" end-justified="">
+      <div class="error" flex="" layout="" horizontal="" center="" hidden?="{{!isInvalid}}">
+        <div class="error-text" flex="" auto="" role="alert" aria-hidden="{{!isInvalid}}">{{error}}</div>
+        <core-icon id="errorIcon" class="error-icon" icon="warning"></core-icon>
+      </div>
+      <div aria-hidden="true">
+        <content select=".counter"></content>
+      </div>
+    </div>
+
+  </template>
+
+  <script>!function(){var t=CoreStyle.g.paperInput=CoreStyle.g.paperInput||{};t.labelColor="#757575",t.focusedColor="#4059a9",t.invalidColor="#d34336",Polymer({publish:{label:"",floatingLabel:!1,disabled:{value:!1,reflect:!0},labelVisible:null,isInvalid:!1,autoValidate:!1,error:"",focused:{value:!1,reflect:!0}},computed:{floatingLabelVisible:"floatingLabel && !_labelVisible",_labelVisible:"(labelVisible === true || labelVisible === false) ? labelVisible : _autoLabelVisible"},ready:function(){Polymer.addEventListener(this,"focus",this.focusAction.bind(this),!0),Polymer.addEventListener(this,"blur",this.blurAction.bind(this),!0)},attached:function(){this.input=this.querySelector("input,textarea"),this.mo=new MutationObserver(function(){this.input=this.querySelector("input,textarea")}.bind(this)),this.mo.observe(this,{childList:!0})},detached:function(){this.mo.disconnect(),this.mo=null},prepareLabelTransform:function(){var t=this.$.floatedLabelText.getBoundingClientRect(),i=this.$.labelText.getBoundingClientRect();if(0!==t.width){var e=t.height/i.height;this.$.labelText.cachedTransform="scale3d("+t.width/i.width+","+e+",1) translate3d(0,"+(t.top-i.top)/e+"px,0)"}},animateFloatingLabel:function(){return!(!this.floatingLabel||this.labelAnimated)&&(this.$.labelText.cachedTransform||this.prepareLabelTransform(),!!this.$.labelText.cachedTransform&&(this.labelAnimated=!0,this.async(function(){this.transitionEndAction()},null,250),this._labelVisible?(this.$.labelText.style.webkitTransform||this.$.labelText.style.transform||(this.$.labelText.style.webkitTransform=this.$.labelText.cachedTransform,this.$.labelText.style.transform=this.$.labelText.cachedTransform,this.$.labelText.offsetTop),this.$.labelText.style.webkitTransform="",this.$.labelText.style.transform=""):(this.$.labelText.style.webkitTransform=this.$.labelText.cachedTransform,this.$.labelText.style.transform=this.$.labelText.cachedTransform,this.input.placeholder=""),!0))},animateUnderline:function(t){if(this.focused){var i=this.$.underline.getBoundingClientRect(),e=t.x-i.left;this.$.focusedUnderline.style.mozTransformOrigin=e+"px",this.$.focusedUnderline.style.webkitTransformOrigin=e+"px ",this.$.focusedUnderline.style.transformOriginX=e+"px",this.underlineAnimated=!0}},validate:function(){return this.isInvalid=!this.input.validity.valid,this.input.validity.valid},_labelVisibleChanged:function(t){void 0!==t&&(this.animateFloatingLabel()||this.updateInputLabel(this.input,this.label))},labelVisibleChanged:function(){"true"===this.labelVisible?this.labelVisible=!0:"false"===this.labelVisible&&(this.labelVisible=!1)},labelChanged:function(){this.input&&this.updateInputLabel(this.input,this.label)},isInvalidChanged:function(){this.classList.toggle("invalid",this.isInvalid)},focusedChanged:function(){this.updateLabelVisibility(this.input&&this.input.value),this.lastEvent&&(this.animateUnderline(this.lastEvent),this.lastEvent=null),this.underlineVisible=this.focused},inputChanged:function(t){this.input&&(this.updateLabelVisibility(this.input.value),this.updateInputLabel(this.input,this.label),this.autoValidate&&this.validate()),t&&this.updateInputLabel(t,"")},focusAction:function(){this.focused=!0},blurAction:function(){this.focused=!1},updateLabelVisibility:function(t){var i=null!==t&&void 0!==t?String(t):t;this._autoLabelVisible=!this.focused&&!i||!this.floatingLabel&&!i},updateInputLabel:function(t,i){this._labelVisible?this.input.placeholder=this.label:this.input.placeholder="",i?t.setAttribute("aria-label",i):t.removeAttribute("aria-label")},inputAction:function(){this.updateLabelVisibility(this.input.value),this.autoValidate&&this.validate()},downAction:function(t){return t.target!==this.input&&this.focused?void t.preventDefault():void(this.lastEvent=t)},tapAction:function(t){this.disabled||this.focused||this.input&&(this.input.focus(),t.preventDefault())},transitionEndAction:function(){this.underlineAnimated=!1,this.labelAnimated=!1,this._labelVisible&&(this.input.placeholder=this.label)},charCounterErrorAction:function(t){this.isInvalid=t.detail.hasError,this.$.errorIcon.hidden=t.detail.hideErrorIcon}})}();</script>
+
+</polymer-element>
+</body></html>

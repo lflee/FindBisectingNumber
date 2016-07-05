@@ -1,0 +1,55 @@
+<!DOCTYPE html><html><head>
+    <title>揾平均數 🔎(X+Y)/2=?🔍</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <link rel="manifest" href="/manifest.json">
+
+    <script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+
+    
+
+    <link rel="import" href="app/bower_components/paper-input/paper-input.html">
+
+
+
+    <script type="text/javascript">function updateSmallNum(){smallNum=document.getElementById("small").value,null!=smallNum&&null!=bigNum&&calMean()}function updateBigNum(){bigNum=document.getElementById("big").value,null!=smallNum&&null!=bigNum&&calMean()}function calMean(){var l=Math.ceil((Number(smallNum)+Number(bigNum))/2);console.log("Current mean is:"+l),document.getElementById("meanNum").innerHTML=l}var smallNum,bigNum,max,min;</script>
+
+  </head>
+  <body>
+    <findbisectingnumber-app>
+
+
+    </findbisectingnumber-app>
+
+    <h1>揾平均數 🔎(X+Y)/2=?🔍</h1>
+
+    <paper-input id="small" label="Smaller number" type="number" onchange="updateSmallNum()"></paper-input>
+
+    <paper-input id="big" label="Bigger number" type="number" onchange="updateBigNum()"></paper-input>
+
+    <div id="maxNumIs" disabled="">最大數係：
+      <div id="maxNum">
+
+      </div>
+    </div>
+
+    <div id="minNumIs" disabled="">最細數係：
+      <div id="minNum">
+
+      </div>
+    </div>
+
+
+    <div id="meanNumIs">中間數係：
+      <div id="meanNum">
+
+      </div>
+    </div>
+
+
+<paper-input label="this input requires letters only" auto-validate="" pattern="[a-zA-Z]*" error-message="letters only!"></paper-input>
+
+  
+
+</body></html>

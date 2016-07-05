@@ -1,0 +1,19 @@
+<html><head><link href="../polymer/polymer.html" rel="import">
+
+</head><body><polymer-element name="paper-autogrow-textarea" on-input="{{inputAction}}">
+<template>
+
+  <style>:host{display:inline-block;position:relative;width:400px;}.mirror-text{visibility:hidden;word-wrap:break-word;}::content textarea{padding:0;margin:0;border:none;outline:none;resize:none;width:100%;height:100%;}::content textarea:invalid{box-shadow:none;}</style>
+
+  
+  <div id="mirror" class="mirror-text" aria-hidden="true">&nbsp;</div>
+
+  
+  <div class="textarea-container" fit="">
+    <content></content>
+  </div>
+
+</template>
+<script>Polymer({publish:{target:null,rows:1,maxRows:0},tokens:null,observe:{rows:"updateCached",maxRows:"updateCached"},constrain:function(t){var e;for(t=t||[""],e=this.maxRows>0&&t.length>this.maxRows?t.slice(0,this.maxRows):t.slice(0);this.rows>0&&e.length<this.rows;)e.push("");return e.join("<br>")+"&nbsp;"},valueForMirror:function(t){return this.tokens=t&&t.value?t.value.replace(/&/gm,"&amp;").replace(/"/gm,"&quot;").replace(/'/gm,"&#39;").replace(/</gm,"&lt;").replace(/>/gm,"&gt;").split("\n"):[""],this.constrain(this.tokens)},update:function(t){this.$.mirror.innerHTML=this.valueForMirror(t)},updateCached:function(){this.$.mirror.innerHTML=this.constrain(this.tokens)},inputAction:function(t){this.update(t.target)}});</script>
+</polymer-element>
+</body></html>

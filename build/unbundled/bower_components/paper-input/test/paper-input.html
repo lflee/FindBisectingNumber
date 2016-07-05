@@ -1,0 +1,26 @@
+<!DOCTYPE html><html><head>
+  <meta charset="UTF-8">
+  <title>paper-input tests</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+
+  <script src="../../webcomponentsjs/webcomponents.js"></script>
+  <script src="../../web-component-tester/browser.js"></script>
+  <script src="../../polymer-gestures/test/js/fake.js"></script>
+
+  <script src="util.js"></script>
+
+  <link href="../paper-input.html" rel="import">
+
+  <style>paper-input{width:400px;}</style>
+
+</head>
+<body>
+
+  <paper-input id="default"></paper-input>
+
+  <paper-input id="disabled" disabled="" label="disabled"></paper-input>
+
+  <script>var fake=new Fake;test("change event bubbles",function(e){var t=document.getElementById("default"),n=function(){e(),t.removeEventListener("change",n)};t.addEventListener("change",n);var a=t.shadowRoot.querySelector("input"),o=new Event("change",{bubbles:!0});a.dispatchEvent(o)}),test("cannot tap on disabled input",function(e){var t=document.getElementById("disabled");fake.downOnNode(t),fake.upOnNode(t),setTimeout(function(){assert.notStrictEqual(activeElement(),t.shadowRoot.querySelector("input")),e()},10)});</script>
+
+
+</body></html>

@@ -1,0 +1,7 @@
+{
+  "name": "FindBisectingNumber",
+  "short_name": "FindBisectingNumber",
+  "description": "You input 2 int, the app find the bisecting int, then you can set the result as upper or lower input, then do it again and again.",
+  "start_url": "/",
+  "display": "standalone"
+}

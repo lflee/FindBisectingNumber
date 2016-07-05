@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Find the bisecting number</title>
+
+    <link rel="import" href="app/bower_components/core-input/core-input.html">
+    <link rel="import" href="app/bower_components/paper-input/paper-input.html">
+
+    <script type="text/javascript">
+
+        function calMean(){
+          var num1 = document.getElementById("num1").value ;
+          var num2 = document.getElementById("num2").value ;
+
+          var mean = Math.ceil( (Number(num1) + Number(num2) )/2 ) ;
+
+          console.log(mean);
+
+          document.getElementById("mean").innerHTML = mean ;
+
+        }
+
+    </script>
+
+</head>
+
+<body fullbleed vertical layout unresolved>
+    <h1>Find the bisecting number</h1>
+    
+    <paper-input id="num1" label="First Number" type="number" onchange="calMean()"></paper-input>
+
+    <paper-input id="num2" label="Second Number" type="number" onchange="calMean()"></paper-input>
+    
+    <div id="mean"></div>
+
+</body>
+
+</html>

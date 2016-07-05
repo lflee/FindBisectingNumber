@@ -1,0 +1,20 @@
+<!DOCTYPE html><html><head>
+  <meta charset="UTF-8">
+  <title>core-input basic tests</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+
+  <script src="../../webcomponentsjs/webcomponents.js"></script>
+  <script src="../../web-component-tester/browser.js"></script>
+
+  <link href="../core-input.html" rel="import">
+
+</head>
+<body>
+
+  <input id="input1" is="core-input" pattern="[abc]*" preventinvalidinput="">
+
+  <script>function dispatchInputEvent(t){var n=new Event("input",{bubbles:!0});t.dispatchEvent(n)}var i1=document.getElementById("input1");suite("preventInvalidInput",function(){test("cannot enter invalid input",function(){i1.value="123",dispatchInputEvent(i1),assert.ok(!i1.value)}),test("preserves valid input after entering invalid input",function(){var t="abc";i1.value=t,dispatchInputEvent(i1),assert.strictEqual(t,i1.value),i1.value=t+"123",dispatchInputEvent(i1),assert.strictEqual(t,i1.value)})});</script>
+
+
+
+</body></html>

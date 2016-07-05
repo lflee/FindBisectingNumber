@@ -1,0 +1,72 @@
+<!DOCTYPE html><html><head>
+
+  <title>iron-input tests</title>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1,user-scalable=yes">
+
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+  <script src="../../web-component-tester/browser.js"></script>
+  <script src="../../test-fixture/test-fixture-mocha.js"></script>
+
+  <link rel="import" href="../../test-fixture/test-fixture.html">
+  <link rel="import" href="../iron-input.html">
+  <link rel="import" href="letters-only.html">
+
+</head>
+<body>
+
+  <test-fixture id="basic">
+    <template>
+      <input is="iron-input">
+    </template>
+  </test-fixture>
+
+  <test-fixture id="has-value">
+    <template>
+      <input is="iron-input" value="foobar">
+    </template>
+  </test-fixture>
+
+  <test-fixture id="has-bind-value">
+    <template>
+      <input is="iron-input" bind-value="foobar">
+    </template>
+  </test-fixture>
+
+  <test-fixture id="prevent-invalid-input">
+    <template>
+      <input is="iron-input" prevent-invalid-input="" pattern="[0-9]">
+    </template>
+  </test-fixture>
+
+  <test-fixture id="prevent-invalid-input-has-value">
+    <template>
+      <input is="iron-input" prevent-invalid-input="" pattern="[0-9]*" value="foobar">
+    </template>
+  </test-fixture>
+
+  <test-fixture id="prevent-invalid-input-has-bind-value">
+    <template>
+      <input is="iron-input" prevent-invalid-input="" pattern="[0-9]*" bind-value="foobar">
+    </template>
+  </test-fixture>
+
+  <test-fixture id="has-validator">
+    <template>
+      <letters-only></letters-only>
+      <input is="iron-input" validator="letters-only" pattern="[0-9]*">
+    </template>
+  </test-fixture>
+
+  <template is="dom-bind" id="bind-to-object">
+    <input is="iron-input" id="input" bind-value="{{foo}}">
+  </template>
+
+  <script>suite("basic",function(){test("setting bindValue sets value",function(){var e=fixture("basic");e.bindValue="foobar",assert.equal(e.value,e.bindValue,"value equals to bindValue")}),test("changing the input triggers an event",function(e){var a=fixture("basic");a.addEventListener("bind-value-changed",function(t){assert.equal(a.value,a.bindValue,"value equals to bindValue"),e()}),a.value="foo",a._onInput()}),test("default value sets bindValue",function(){var e=fixture("has-value");assert.equal(e.bindValue,e.value,"bindValue equals value")}),test("default bindValue sets value",function(){var e=fixture("has-bind-value");assert.equal(e.value,e.bindValue,"value equals to bindValue")}),test("set bindValue to undefined",function(){var e=document.getElementById("bind-to-object");e.foo=void 0,assert.ok(!e.$.input.bindValue,"bindValue is falsy"),assert.ok(!e.$.input.value,"value is falsy")}),test("validator used instead of constraints api if provided",function(){var e=fixture("has-validator")[1];e.value="123",e.validate(),assert.isTrue(e.invalid,"input is invalid")}),test("prevent invalid input works in _onInput",function(){var e=fixture("prevent-invalid-input");e.value="123",e._onInput(),assert.equal(e.bindValue,"123"),e.value="123foo",e._onInput(),assert.equal(e.bindValue,"123")})});</script>
+
+
+
+</body></html>

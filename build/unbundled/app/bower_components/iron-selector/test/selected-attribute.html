@@ -1,0 +1,35 @@
+<!DOCTYPE html><html><head>
+
+  <title>iron-selector-selected-attribute</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="../../web-component-tester/browser.js"></script>
+  <script src="../../test-fixture/test-fixture-mocha.js"></script>
+
+  <link rel="import" href="../../test-fixture/test-fixture.html">
+  <link rel="import" href="../iron-selector.html">
+
+  <style>.iron-selected{background:#ccc;}</style>
+
+</head>
+<body>
+
+  <test-fixture id="test">
+    <template>
+      <iron-selector id="selector">
+        <div>Item 0</div>
+        <div>Item 1</div>
+        <div>Item 2</div>
+        <div>Item 3</div>
+        <div>Item 4</div>
+      </iron-selector>
+    </template>
+  </test-fixture>
+
+  <script>suite("selected attributes",function(){var t;setup(function(){t=fixture("test")}),test("custom selectedAttribute",function(){t.selectedAttribute="myattr",assert.isFalse(t.children[4].hasAttribute("myattr")),t.selected=4,assert.isTrue(t.children[4].hasAttribute("myattr"))})});</script>
+
+
+
+</body></html>

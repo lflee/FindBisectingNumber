@@ -1,0 +1,63 @@
+<!DOCTYPE html><html><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Email/Password Authentication Example</title>
+
+  
+  <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.orange-indigo.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <script defer="" src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+
+  <link rel="stylesheet" href="main.css">
+
+  
+  
+
+  <script type="text/javascript">function toggleSignIn(){if(firebase.auth().currentUser)firebase.auth().signOut();else{var e=document.getElementById("email").value,t=document.getElementById("password").value;if(e.length<4)return void alert("Please enter an email address.");if(t.length<4)return void alert("Please enter a password.");firebase.auth().signInWithEmailAndPassword(e,t).catch(function(e){var t=e.code;e.message;"auth/wrong-password"===t?alert("Wrong password."):console.error(e)})}document.getElementById("quickstart-sign-in").disabled=!0}function handleSignUp(){var e=document.getElementById("email").value,t=document.getElementById("password").value;return e.length<4?void alert("Please enter an email address."):t.length<4?void alert("Please enter a password."):void firebase.auth().createUserWithEmailAndPassword(e,t).catch(function(e){var t=e.code;e.message;"auth/weak-password"==t?alert("The password is too weak."):console.error(e)})}function initApp(){firebase.auth().onAuthStateChanged(function(e){if(e){var t=e.displayName,n=e.email,i=e.emailVerified,a=e.photoURL,s=e.isAnonymous,d=e.uid,o=e.refreshToken,r=e.providerData;document.getElementById("quickstart-sign-in-status").textContent="Signed in",document.getElementById("quickstart-sign-in").textContent="Sign out",document.getElementById("quickstart-account-details").textContent=JSON.stringify({displayName:t,email:n,emailVerified:i,photoURL:a,isAnonymous:s,uid:d,refreshToken:o,providerData:r},null,"  ")}else document.getElementById("quickstart-sign-in-status").textContent="Signed out",document.getElementById("quickstart-sign-in").textContent="Sign in",document.getElementById("quickstart-account-details").textContent="null";document.getElementById("quickstart-sign-in").disabled=!1}),document.getElementById("quickstart-sign-in").addEventListener("click",toggleSignIn,!1),document.getElementById("quickstart-sign-up").addEventListener("click",handleSignUp,!1)}window.onload=function(){initApp()};</script>
+</head>
+<body>
+<div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
+
+  
+  <header class="mdl-layout__header mdl-color-text--white mdl-color--light-blue-700">
+    <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-grid">
+      <div class="mdl-layout__header-row mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--8-col-desktop">
+        <a href="/"><h3>Firebase Authentication</h3></a>
+      </div>
+    </div>
+  </header>
+
+  <main class="mdl-layout__content mdl-color--grey-100">
+    <div class="mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-grid">
+
+      
+      <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-desktop">
+        <div class="mdl-card__title mdl-color--light-blue-600 mdl-color-text--white">
+          <h2 class="mdl-card__title-text">Firebase Email &amp; Password Authentication</h2>
+        </div>
+        <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+          <p>Enter an email and password below and either sign in to an existing account or sign up</p>
+
+          <input class="mdl-textfield__input" style="display:inline;width:auto" type="text" id="email" name="email" placeholder="Email">
+          &nbsp;&nbsp;&nbsp;
+          <input class="mdl-textfield__input" style="display:inline;width:auto" type="password" id="password" name="password" placeholder="Password">
+          <br><br>
+          <button disabled="" class="mdl-button mdl-js-button mdl-button--raised" id="quickstart-sign-in" name="signin">Sign In</button>
+          &nbsp;&nbsp;&nbsp;
+          <button class="mdl-button mdl-js-button mdl-button--raised" id="quickstart-sign-up" name="signup">Sign Up</button>
+
+          
+          <div class="quickstart-user-details-container">
+            Firebase sign-in status: <span id="quickstart-sign-in-status">Unknown</span>
+            <div>Firebase auth <code>currentUser</code> object value:</div>
+            <pre><code id="quickstart-account-details">null</code></pre>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+
+</body></html>

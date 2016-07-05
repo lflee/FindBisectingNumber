@@ -1,0 +1,35 @@
+<!DOCTYPE html><html><head>
+
+  <title>iron-selector-multi</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="../../web-component-tester/browser.js"></script>
+  <script src="../../test-fixture/test-fixture-mocha.js"></script>
+
+  <link rel="import" href="../../test-fixture/test-fixture.html">
+  <link rel="import" href="../iron-selector.html">
+
+  <style>.iron-selected{background:#ccc;}</style>
+
+</head>
+<body>
+
+  <test-fixture id="test">
+    <template>
+      <iron-selector multi="">
+        <div>Item 0</div>
+        <div>Item 1</div>
+        <div>Item 2</div>
+        <div>Item 3</div>
+        <div>Item 4</div>
+      </iron-selector>
+    </template>
+  </test-fixture>
+
+  <script>suite("multi",function(){var e;setup(function(){e=fixture("test")}),test("honors the multi attribute",function(){assert.isTrue(e.multi)}),test("has sane defaults",function(){assert.equal(e.selectedValues,void 0),assert.equal(e.selectedClass,"iron-selected"),assert.equal(e.items.length,5)}),test("set multi-selection via selected property",function(){e.selectedValues=[0,2],assert.isTrue(e.children[0].classList.contains("iron-selected")),assert.isTrue(e.children[2].classList.contains("iron-selected")),assert.equal(e.selectedItems.length,2),assert.equal(e.selectedItems[0],e.children[0]),assert.equal(e.selectedItems[1],e.children[2])}),test("set multi-selection via tap",function(){e.children[0].dispatchEvent(new CustomEvent("tap",{bubbles:!0})),e.children[2].dispatchEvent(new CustomEvent("tap",{bubbles:!0})),assert.isTrue(e.children[0].classList.contains("iron-selected")),assert.isTrue(e.children[2].classList.contains("iron-selected")),assert.equal(e.selectedItems.length,2),assert.equal(e.selectedItems[0],e.children[0]),assert.equal(e.selectedItems[1],e.children[2])}),test("fire iron-select/deselect events",function(){var s=0;e.addEventListener("iron-select",function(e){s++});var t=0;e.addEventListener("iron-deselect",function(e){t++}),e.children[0].dispatchEvent(new CustomEvent("tap",{bubbles:!0})),assert.equal(s,1),assert.equal(t,0),e.children[0].dispatchEvent(new CustomEvent("tap",{bubbles:!0})),assert.equal(e.selectedValues.length,0),assert.isFalse(e.children[0].classList.contains("iron-selected")),assert.equal(s,1),assert.equal(t,1)})});</script>
+
+
+
+</body></html>
