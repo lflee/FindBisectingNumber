@@ -6,6 +6,20 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+      <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-65691103-1', 'auto');
+    ga('send', 'pageview');
+
+    </script>
+
+
+
+
     <link rel="manifest" href="/manifest.json">
 
     <script src="/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
@@ -17,10 +31,7 @@
     <link rel="import" href="bower_components/iron-icon/iron-icon.html">
     <link rel="import" href="bower_components/iron-icons/iron-icons.html">
     <link rel="import" href="bower_components/iron-iconset-svg/iron-iconset-svg.html">
-    <link rel="import" href="bower_components/app-layout/app-layout.html">
-    <!-- <link rel="import" href="bower_components/app-layout/app-drawer/app-drawer.html">
-    <link rel="import" href="bower_components/app-layout/app-drawer-layout/app-drawer-layout.html"> -->
-
+    <link rel="import" href="bower_components/app-layout/app-drawer/app-drawer.html">
 
     <script type="text/javascript">
     var small ;
@@ -205,19 +216,9 @@ console.log("Why not here? bigNum:"+big+" smallNum:"+small+" min:"+min );
       <app-drawer>
       </app-drawer>
 
-      <app-header-layout>
-        <app-header>
-          <app-toolbar>
-            <div title>用二分法揾未知數
-              <br>🔎(X+Y)/2=?🔍
-            </div>
-          </app-toolbar>
-        </app-header>
-
-
-
-        <!-- <h1>用二分法揾未知數
-          <br>🔎(X+Y)/2=?🔍</h1> -->
+      <div>
+        <h1>用二分法揾未知數
+          <br>🔎(X+Y)/2=?🔍</h1>
 
         <paper-input always-float-label id="smallNum" label="Smaller number" type="number" onchange="update()"></paper-input>
 
@@ -258,7 +259,6 @@ console.log("Why not here? bigNum:"+big+" smallNum:"+small+" min:"+min );
         <div id="meanRecords">平均數記錄：
 
         </div>
-      </app-header-layout>
     </app-drawer-layout>
   </body>
 </html>
