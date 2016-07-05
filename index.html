@@ -57,11 +57,18 @@
         min = smallNum ;
         document.getElementById("minNum").innerHTML = min ;
       }
+      if(bigNum < min){
+        max = smallNum ;
+        document.getElementById("minNum").innerHTML = min ;
+      }
+      if(smallNum > max){
+        max = smallNum ;
+        document.getElementById("maxNum").innerHTML = max ;
+      }
       if(bigNum > max){
         max = bigNum ;
         document.getElementById("maxNum").innerHTML = max ;
       }
-
       calMean();
     }
 
@@ -103,13 +110,15 @@
 
     <div id="meanNumIs">新計出嚟嘅平均數係：
       <div id="meanNum">
-        <paper-button raised id="setAsBig"><iron-icon icon="arrow-upward"></iron-icon>Set 依個數為大數</paper-button>
-        <paper-button raised id="setAsSmall"><iron-icon icon="arrow-downward"></iron-icon>Set 依個數為細數</paper-button>
-
       </div>
+      <paper-button raised id="setAsSmall"><iron-icon icon="arrow-downward"></iron-icon>將佢 set 為細數</paper-button>
+      <paper-button raised id="setAsBig"><iron-icon icon="arrow-upward"></iron-icon>將佢 set 為大數</paper-button>
+
+
     </div>
     <div id="meanRecords">平均數記錄：
 
     </div>
+
   </body>
 </html>
