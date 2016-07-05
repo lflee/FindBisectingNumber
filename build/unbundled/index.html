@@ -14,44 +14,65 @@
     <link rel="import" href="bower_components/iron-icon/iron-icon.html">
     <link rel="import" href="bower_components/iron-icons/iron-icons.html">
     <link rel="import" href="bower_components/iron-iconset-svg/iron-iconset-svg.html">
+    <link rel="import" href="bower_components/app-layout/app-layout.html">
+    
 
-    <script type="text/javascript">function init(){smallNum=0,bigNum=0,min=0,max=0,document.getElementById("small").value=smallNum,document.getElementById("big").value=bigNum,document.getElementById("minNum").innerHTML=min,document.getElementById("maxNum").innerHTML=max,calMean()}function update(){smallNum=document.getElementById("small").value,bigNum=document.getElementById("big").value,smallNum>bigNum&&(document.getElementById("big").value=smallNum,document.getElementById("small").value=bigNum,smallNum=document.getElementById("small").value,bigNum=document.getElementById("big").value),smallNum<min&&(min=smallNum,document.getElementById("minNum").innerHTML=min),bigNum<min&&(max=smallNum,document.getElementById("minNum").innerHTML=min),smallNum>max&&(max=smallNum,document.getElementById("maxNum").innerHTML=max),bigNum>max&&(max=bigNum,document.getElementById("maxNum").innerHTML=max),calMean()}function calMean(){var m=Math.ceil((Number(smallNum)+Number(bigNum))/2);document.getElementById("meanNum").innerHTML=m;var e=document.createElement("div"),n=document.createTextNode(m);e.appendChild(n);var l=document.getElementById("meanRecords");l.appendChild(e)}var smallNum,bigNum,min,max;</script>
+
+    <script type="text/javascript">function init(){small=0,big=0,min=0,max=0,document.getElementById("smallNum").value=small,document.getElementById("bigNum").value=big,document.getElementById("minNum").innerHTML=min,document.getElementById("maxNum").innerHTML=max,calMean()}function update(){small=document.getElementById("smallNum").value,big=document.getElementById("bigNum").value,big>small?(console.log("bigNum:"+big+" smallNum:"+small+" min:"+min),small<min&&(console.log("Why not here? bigNum:"+big+" smallNum:"+small+" min:"+min),min=small,console.log("min is: "+min),document.getElementById("minNum").innerHTML=min),big>max&&(max=big,document.getElementById("maxNum").innerHTML=max)):(small>max?(max=small,document.getElementById("maxNum").innerHTML=max):big<min&&(min=bigNum,document.getElementById("minNum").innerHTML=min),tempSmall=big,tempBig=small,small=tempSmall,big=tempBig,document.getElementById("smallNum").value=small,document.getElementById("bigNum").value=big),calMean()}function calMean(){mean=Math.ceil((Number(small)+Number(big))/2),document.getElementById("meanNum").innerHTML=mean;var m=document.createElement("div"),e=document.createTextNode(mean);m.appendChild(e);var n=document.getElementById("meanRecords");n.appendChild(m)}var small,big,min,max,mean,tempSmall,tempBig;</script>
 
   </head>
   <body onload="init()">
+    <app-drawer-layout>
+      <app-drawer>
+      </app-drawer>
 
-    <h1>用二分法揾未知數
-      <br>🔎(X+Y)/2=?🔍</h1>
-
-    <paper-input id="small" label="Smaller number" type="number" onchange="update()"></paper-input>
-
-    <paper-input id="big" label="Bigger number" type="number" onchange="update()"></paper-input>
-
-    <div id="maxNumIs">最大數係：
-      <div id="maxNum">
-
-      </div>
-    </div>
-
-    <div id="minNumIs">最細數係：
-      <div id="minNum">
-
-      </div>
-    </div>
+      <app-header-layout>
+        <app-header>
+          <app-toolbar>
+            <div title="">用二分法揾未知數
+              <br>🔎(X+Y)/2=?🔍
+            </div>
+          </app-toolbar>
+        </app-header>
 
 
-    <div id="meanNumIs">新計出嚟嘅平均數係：
-      <div id="meanNum">
-      </div>
-      <paper-button raised="" id="setAsSmall"><iron-icon icon="arrow-downward"></iron-icon>將佢 set 為細數</paper-button>
-      <paper-button raised="" id="setAsBig"><iron-icon icon="arrow-upward"></iron-icon>將佢 set 為大數</paper-button>
+
+        
+
+        <paper-input always-float-label="" id="smallNum" label="Smaller number" type="number" onchange="update()"></paper-input>
+
+        <paper-input always-float-label="" id="bigNum" label="Bigger number" type="number" onchange="update()"></paper-input>
+
+        <div id="maxNumIs">最大數係：
+          <div id="maxNum">
+
+          </div>
+        </div>
+
+        <div id="minNumIs">最細數係：
+          <div id="minNum">
+
+          </div>
+        </div>
 
 
-    </div>
-    <div id="meanRecords">平均數記錄：
+        <div id="meanNumIs">新計出嚟嘅平均數係：
+          <div id="meanNum">
+          </div>
+          <paper-button raised="" id="setAsSmall"><iron-icon icon="arrow-downward"></iron-icon>將佢 set 為細數</paper-button>
+          <paper-button raised="" id="setAsBig"><iron-icon icon="arrow-upward"></iron-icon>將佢 set 為大數</paper-button>
+          <paper-button raised="" id="copy"><iron-icon icon="content-copy" onclick="ClipBoard()"></iron-icon>Copy 咗個數佢</paper-button>
 
-    </div>
 
+    
+
+
+        </div>
+        <div id="meanRecords">平均數記錄：
+
+        </div>
+      </app-header-layout>
+    </app-drawer-layout>
   
 
 </body></html>

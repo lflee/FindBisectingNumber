@@ -17,56 +17,145 @@
     <link rel="import" href="bower_components/iron-icon/iron-icon.html">
     <link rel="import" href="bower_components/iron-icons/iron-icons.html">
     <link rel="import" href="bower_components/iron-iconset-svg/iron-iconset-svg.html">
+    <link rel="import" href="bower_components/app-layout/app-layout.html">
+    <!-- <link rel="import" href="bower_components/app-layout/app-drawer/app-drawer.html">
+    <link rel="import" href="bower_components/app-layout/app-drawer-layout/app-drawer-layout.html"> -->
+
 
     <script type="text/javascript">
-    var smallNum ;
-    var bigNum ;
+    var small ;
+    var big ;
     var min ;
     var max ;
+    var mean ;
+    var tempSmall ;
+    var tempBig ;
 
 
 
 
     function init(){
-      smallNum = 0;
-      bigNum = 0;
+      small = 0;
+      big = 0;
       min = 0;
       max = 0;
 
-      document.getElementById("small").value = smallNum ;
-      document.getElementById("big").value = bigNum ;
+      document.getElementById("smallNum").value = small ;
+      document.getElementById("bigNum").value = big ;
       document.getElementById("minNum").innerHTML = min ;
       document.getElementById("maxNum").innerHTML = max ;
 
       calMean();
     }
 
+//     function update(){
+//
+//       small = document.getElementById("smallNum").value ;
+//       big = document.getElementById("bigNum").value ;
+//
+//       if(big > small && big > max){
+//         max = big ;
+//         document.getElementById("maxNum").innerHTML = max ;
+//         calMean();
+//       }else if (big < small && small > max ) {
+//         tempSmall = big;
+//         tempBig = small;
+//
+//         small = tempSmall ;
+//         big = tempBig ;
+//
+//         document.getElementById("smallNum").value = small ;
+//         document.getElementById("bigNum").value = big ;
+//         calMean();
+//       }else if (small < min) {
+//         min = small ;
+//
+// console.log("min is:" + min + "small is:" + small);
+//
+//         document.getElementById("minNum").innerHTML = min ;
+//         calMean();
+//
+//       }
+//     }
+//
+//
+//
+//
+// console.log("bigNum:"+bigNum+" smallNum:"+smallNum+" min:"+min );
+//
+//         if(smallNum < min){
+//
+// console.log("Why not here? bigNum:"+bigNum+" smallNum:"+smallNum+" min:"+min );
+//
+//           min = smallNum;
+//          console.log("min is: " + min);
+//           document.getElementById("minNum").innerHTML = min ;
+//         }
+//
+//
+//         if(bigNum > max){
+//           max = bigNum;
+//           document.getElementById("maxNum").innerHTML = max ;
+//         }
+//
+//
+//
+//
+//
+//       }else {
+//           if(smallNum > max){
+//             max = smallNum;
+//             document.getElementById("maxNum").innerHTML = max ;
+//           }else if(bigNum < min){
+//             min = bigNum;
+//             document.getElementById("minNum").innerHTML = min ;
+//           }
+//
+//           var newSmallNum = bigNum;
+//           var newBigNum = smallNum;
+//
+//           smallNum = newSmallNum;
+//           bigNum = newBigNum;
+//
+//           document.getElementById("small").value = smallNum ;
+//           document.getElementById("big").value = bigNum ;
+//
+//       }
+//
+//     }
+//
+//
+//
+//
+//
+
+
     function update(){
 
-      smallNum = document.getElementById("small").value ;
+      small = document.getElementById("smallNum").value ;
 
 // console.log("smallNum is: " + smallNum);
 
-      bigNum = document.getElementById("big").value ;
+      big = document.getElementById("bigNum").value ;
 
 // console.log("bigNum is: " + bigNum);
 
-      if(bigNum > smallNum){
+      if(big > small){
 
-console.log("bigNum:"+bigNum+" smallNum:"+smallNum+" min:"+min );
+console.log("bigNum:"+big+" smallNum:"+small+" min:"+min );
 
-        if(smallNum < min){
+        if(small < min){
 
-console.log("Why not here? bigNum:"+bigNum+" smallNum:"+smallNum+" min:"+min );
+console.log("Why not here? bigNum:"+big+" smallNum:"+small+" min:"+min );
 
-          min = smallNum;
+          min = small;
          console.log("min is: " + min);
           document.getElementById("minNum").innerHTML = min ;
         }
 
 
-        if(bigNum > max){
-          max = bigNum;
+        if(big > max){
+          max = big;
           document.getElementById("maxNum").innerHTML = max ;
         }
 
@@ -75,22 +164,22 @@ console.log("Why not here? bigNum:"+bigNum+" smallNum:"+smallNum+" min:"+min );
 
 
       }else {
-          if(smallNum > max){
-            max = smallNum;
+          if(small > max){
+            max = small;
             document.getElementById("maxNum").innerHTML = max ;
-          }else if(bigNum < min){
+          }else if(big < min){
             min = bigNum;
             document.getElementById("minNum").innerHTML = min ;
           }
 
-          var newSmallNum = bigNum;
-          var newBigNum = smallNum;
+          tempSmall = big;
+          tempBig = small;
 
-          smallNum = newSmallNum;
-          bigNum = newBigNum;
+          small = tempSmall;
+          big = tempBig;
 
-          document.getElementById("small").value = smallNum ;
-          document.getElementById("big").value = bigNum ;
+          document.getElementById("smallNum").value = small ;
+          document.getElementById("bigNum").value = big ;
 
       }
 
@@ -98,63 +187,78 @@ console.log("Why not here? bigNum:"+bigNum+" smallNum:"+smallNum+" min:"+min );
     }
 
     function calMean(){
-      mean = Math.ceil( (Number(smallNum) + Number(bigNum) )/2 ) ;
+      mean = Math.ceil( (Number(small) + Number(big) )/2 ) ;
       document.getElementById("meanNum").innerHTML = mean ;
 
-      // var para = document.createElement("div");
-      // var node = document.createTextNode(mean);
-      // para.appendChild(node);
-      // var element = document.getElementById("meanRecords");
-      // element.appendChild(para);
+      var para = document.createElement("div");
+      var node = document.createTextNode(mean);
+      para.appendChild(node);
+      var element = document.getElementById("meanRecords");
+      element.appendChild(para);
     }
 
     </script>
 
   </head>
   <body onload="init()">
+    <app-drawer-layout>
+      <app-drawer>
+      </app-drawer>
 
-    <h1>用二分法揾未知數
-      <br>🔎(X+Y)/2=?🔍</h1>
-
-    <paper-input always-float-label id="small" label="Smaller number" type="number" onchange="update()"></paper-input>
-
-    <paper-input always-float-label id="big" label="Bigger number" type="number" onchange="update()"></paper-input>
-
-    <div id="maxNumIs">最大數係：
-      <div id="maxNum">
-
-      </div>
-    </div>
-
-    <div id="minNumIs">最細數係：
-      <div id="minNum">
-
-      </div>
-    </div>
+      <app-header-layout>
+        <app-header>
+          <app-toolbar>
+            <div title>用二分法揾未知數
+              <br>🔎(X+Y)/2=?🔍
+            </div>
+          </app-toolbar>
+        </app-header>
 
 
-    <div id="meanNumIs">新計出嚟嘅平均數係：
-      <div id="meanNum">
-      </div>
-      <paper-button raised id="setAsSmall"><iron-icon icon="arrow-downward"></iron-icon>將佢 set 為細數</paper-button>
-      <paper-button raised id="setAsBig"><iron-icon icon="arrow-upward"></iron-icon>將佢 set 為大數</paper-button>
-      <paper-button raised id="copy"><iron-icon icon="content-copy" onclick="ClipBoard()"></iron-icon>Copy 咗個數佢</paper-button>
+
+        <!-- <h1>用二分法揾未知數
+          <br>🔎(X+Y)/2=?🔍</h1> -->
+
+        <paper-input always-float-label id="smallNum" label="Smaller number" type="number" onchange="update()"></paper-input>
+
+        <paper-input always-float-label id="bigNum" label="Bigger number" type="number" onchange="update()"></paper-input>
+
+        <div id="maxNumIs">最大數係：
+          <div id="maxNum">
+
+          </div>
+        </div>
+
+        <div id="minNumIs">最細數係：
+          <div id="minNum">
+
+          </div>
+        </div>
 
 
-<script type="text/javascript">
-function ClipBoard()
-{
-holdtext.innerText = copytext.innerText;
-Copied = holdtext.createTextRange();
-Copied.execCommand("Copy");
-}
-</script>
+        <div id="meanNumIs">新計出嚟嘅平均數係：
+          <div id="meanNum">
+          </div>
+          <paper-button raised id="setAsSmall"><iron-icon icon="arrow-downward"></iron-icon>將佢 set 為細數</paper-button>
+          <paper-button raised id="setAsBig"><iron-icon icon="arrow-upward"></iron-icon>將佢 set 為大數</paper-button>
+          <paper-button raised id="copy"><iron-icon icon="content-copy" onclick="ClipBoard()"></iron-icon>Copy 咗個數佢</paper-button>
 
 
-    </div>
-    <div id="meanRecords">平均數記錄：
+    <!-- <script type="text/javascript">
+    function ClipBoard()
+    {
+    holdtext.innerText = copytext.innerText;
+    Copied = holdtext.createTextRange();
+    Copied.execCommand("Copy");
+    }
+    </script> -->
 
-    </div>
 
+        </div>
+        <div id="meanRecords">平均數記錄：
+
+        </div>
+      </app-header-layout>
+    </app-drawer-layout>
   </body>
 </html>
