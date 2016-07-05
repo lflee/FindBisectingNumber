@@ -1,5 +1,5 @@
 <!DOCTYPE html><html><head>
-    <title>揾平均數 🔎(X+Y)/2=?🔍</title>
+    <title>用二分法揾未知數 🔎(X+Y)/2=?🔍</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
 
@@ -9,32 +9,31 @@
 
     
 
-    <link rel="import" href="app/bower_components/paper-input/paper-input.html">
+    <link rel="import" href="bower_components/paper-input/paper-input.html">
+    <link rel="import" href="bower_components/paper-button/paper-button.html">
+    <link rel="import" href="bower_components/iron-icon/iron-icon.html">
+    <link rel="import" href="bower_components/iron-icons/iron-icons.html">
 
 
-
-    <script type="text/javascript">function updateSmallNum(){smallNum=document.getElementById("small").value,null!=smallNum&&null!=bigNum&&calMean()}function updateBigNum(){bigNum=document.getElementById("big").value,null!=smallNum&&null!=bigNum&&calMean()}function calMean(){var l=Math.ceil((Number(smallNum)+Number(bigNum))/2);console.log("Current mean is:"+l),document.getElementById("meanNum").innerHTML=l}var smallNum,bigNum,max,min;</script>
+    <script type="text/javascript">function init(){smallNum=0,bigNum=0,min=0,max=0,document.getElementById("small").value=smallNum,document.getElementById("big").value=bigNum,document.getElementById("minNum").innerHTML=min,document.getElementById("maxNum").innerHTML=max,calMean()}function update(){smallNum=document.getElementById("small").value,bigNum=document.getElementById("big").value,smallNum>bigNum&&(document.getElementById("big").value=smallNum,document.getElementById("small").value=bigNum,smallNum=document.getElementById("small").value,bigNum=document.getElementById("big").value),smallNum<min&&(min=smallNum,document.getElementById("minNum").innerHTML=min),bigNum>max&&(max=bigNum,document.getElementById("maxNum").innerHTML=max),calMean()}function calMean(){var e=Math.ceil((Number(smallNum)+Number(bigNum))/2);document.getElementById("meanNum").innerHTML=e;var m=document.createElement("div"),n=document.createTextNode(e);m.appendChild(n);var l=document.getElementById("meanRecords");l.appendChild(m)}var smallNum,bigNum,max,min;</script>
 
   </head>
-  <body>
-    <findbisectingnumber-app>
+  <body onload="init()">
 
+    <h1>用二分法揾未知數
+      <br>🔎(X+Y)/2=?🔍</h1>
 
-    </findbisectingnumber-app>
+    <paper-input id="small" label="Smaller number" type="number" onchange="update()"></paper-input>
 
-    <h1>揾平均數 🔎(X+Y)/2=?🔍</h1>
+    <paper-input id="big" label="Bigger number" type="number" onchange="update()"></paper-input>
 
-    <paper-input id="small" label="Smaller number" type="number" onchange="updateSmallNum()"></paper-input>
-
-    <paper-input id="big" label="Bigger number" type="number" onchange="updateBigNum()"></paper-input>
-
-    <div id="maxNumIs" disabled="">最大數係：
+    <div id="maxNumIs">最大數係：
       <div id="maxNum">
 
       </div>
     </div>
 
-    <div id="minNumIs" disabled="">最細數係：
+    <div id="minNumIs">最細數係：
       <div id="minNum">
 
       </div>
@@ -43,13 +42,14 @@
 
     <div id="meanNumIs">中間數係：
       <div id="meanNum">
+        <paper-button raised="" id="setAsSmall"><iron-icon icon="file-download"></iron-icon>Set 依個數為細數</paper-button>
+
 
       </div>
     </div>
+    <div id="meanRecords">平均數記錄：
 
-
-<paper-input label="this input requires letters only" auto-validate="" pattern="[a-zA-Z]*" error-message="letters only!"></paper-input>
-
+    </div>
   
 
 </body></html>
